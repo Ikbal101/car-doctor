@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logo from '../../../assets/logo.svg'
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import pic from "../../../assets/images/banner/1.jpg"
 
 
 const NavBar = () => {
@@ -10,7 +11,10 @@ const NavBar = () => {
 
     const handleLogOut = () => {
         logOut()
-        .then(() =>{})
+        .then(() =>{
+            localStorage.removeItem('car-access-token');
+        })
+        
         .catch( error => console.log(error))
     }
 
@@ -20,6 +24,7 @@ const NavBar = () => {
         { user?.email ?  <>
             <li><Link to="/bookings">My Bookings</Link></li>
             <li><button onClick={handleLogOut}>Log out</button></li>
+            <img src={pic} className="h-10 w-10 rounded-full" alt="" />
         </> 
         : <li> <Link to="/login">Login</Link> </li>
        }
